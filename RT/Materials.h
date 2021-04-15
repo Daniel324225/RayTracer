@@ -93,7 +93,7 @@ static_assert(Material<Dielectric>);
 
 template <Material... Ms>
 class MaterialList {
-	static_assert(utils::are_distinct<Ms..>_v, "Some type appears more then one time");
+	static_assert(utils::are_distinct<Ms...>::value, "Some type appears more then one time");
 
 	std::tuple<std::vector<Ms>...> materials;
 	
@@ -105,7 +105,7 @@ public:
 	[[nodiscard]]
 	MaterialIndex emplace_material(Ts... args) {
 		static_assert(utils::is_in_pack_v<M, Ms...>, "This material is not in the list");
-		static_assert(std::is_constructible_v<M, Ts..>, "Cannot construct material from given arguments");
+		static_assert(std::is_constructible_v<M, Ts...>, "Cannot construct material from given arguments");
 
 		auto& vec = std::get<std::vector<M>>(materials);
 		vec.emplace_back(std::forward<Ts>(args)...);

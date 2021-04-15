@@ -14,7 +14,7 @@ struct TypeList {};
 
 template <typename Hittables, typename Materials>
 class RayTracer {
-	static_assert(!std::is_void<std::void_t<Hittables>>, "Wrong template arguments");
+	static_assert(!std::is_void_v<std::void_t<Hittables>>, "Wrong template arguments");
 };
 
 template <Hittable... Hs, Material... Ms>
